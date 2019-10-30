@@ -1,0 +1,22 @@
+pragma solidity ^0.4.22;
+
+  Init Teaparty {
+    //Defines instance to variablize constructs
+    
+    Struct Voter {
+      uint weight     //Amount in denoted currency
+      bool voted      // True/False as to voted
+      address delegate // Place of staked delegation  
+      uint vote       //Specific proposal serialized
+      }
+    Struct Proposal {
+    bytes name
+    uint votecount
+      }
+      
+  Adress public Chairperson;
+ mapping(adress => Voter) public Voters;
+ 
+    }
+      
+    
