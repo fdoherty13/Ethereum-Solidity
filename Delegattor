@@ -4,8 +4,8 @@ pragma solidity ^0.4.22;
     //Defines instance to variablize constructs
     
     Struct Voter {
-      uint weight     //Amount in denoted currency
-      bool voted      // True/False as to voted
+      uint weight        //Amount in denoted currency
+      bool voted        // True/False as to voted
       address delegate // Place of staked delegation  
       uint vote       //Specific proposal serialized
       }
@@ -15,8 +15,52 @@ pragma solidity ^0.4.22;
       }
       
   Adress public Chairperson;
+  
+  //Declares State Variable
+ 
  mapping(adress => Voter) public Voters;
  
     }
-      
+    // A dynamically-sized array of 'Proposal" structs
+    Proposal[] public proposals;
+    
+    ///Create a new ballot to choose one of 'proposalNames'
+    constructor(bytes32[] memory proposalNames) public {
+    chairperson = msg.sender;
+    voters[chairperson].weight = 1;
+    
+    //For each of the provided proposalnames,
+    //create a anew proposal object and add it
+    //to the end of the array
+      for (uint i = 0, i < proposalNames.length; i ++) {
+      // 'Proposal({...})' creates a temporary
+      //Proposal object and 'proposals.push(...)'
+      //appends it to the end of 'proposals
+     proposals.push(Proposak({
+      name: proposalNames[i],
+      voteCount: 0
+      }));
+    }
+  }
+  
+  //Give 'voter'the right to vote on this ballot 
+  //may only be called by 'chairperson'
+ 
+    function giveRightToVote(address voter) public {
+  // If the first arguement of the 'require' evaluates to 'false', 
+  //execution terminates and all changes to t the state and to 
+  //Ether balances are reverted. 'Require" is used to check functions
+      require(msg.sender == chairperson,
+      "only chairperson can give right to vote"
+       );
+       require(
+        !voters[voter].voted,
+      "The voter already voted."
+      );
+      require(voters[voter].weight == 0);
+      voter[voter].weight = 1;
+    }
+    
+    /// Delegation ///
+    
     
