@@ -1,6 +1,6 @@
 pragma solidity ^0.4.22;
 
-  Init Teaparty {
+  Init Ballot {
     //Defines instance to variablize constructs
     
     Struct Voter {
